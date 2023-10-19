@@ -30,6 +30,7 @@ async function run() {
 
         const brandsCollections = client.db('brandWheelsDB').collection('brands');
         const brandsProductsCollections = client.db('brandWheelsDB').collection('brandsProducts');
+        const advertisementsCollections = client.db('brandWheelsDB').collection('advertisements')
 
         app.get('/brands', async (req, res) => {
             const cursor = brandsCollections.find();
@@ -45,6 +46,12 @@ async function run() {
 
         app.get('/brandsProducts', async (req, res) => {
             const cursor = brandsProductsCollections.find();
+            const result = await cursor.toArray();
+            res.send(result);
+        })
+
+        app.get('/advertisements', async(req, res) => {
+            const cursor = advertisementsCollections.find();
             const result = await cursor.toArray();
             res.send(result);
         })
